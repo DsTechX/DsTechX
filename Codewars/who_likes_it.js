@@ -1,7 +1,7 @@
 function likes(names) {
     
     // check if names is an Array
-    if (Array.isArray(users)) {
+    if (Array.isArray(names)) {
       let users = names.filter(elm => elm); // Remove emply values
       let nbUsers = users.length;
       let peoples = "";
