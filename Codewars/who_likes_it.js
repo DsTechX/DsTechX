@@ -1,41 +1,39 @@
 function likes(names) {
-  let users = names.filter(elm => elm); // Remove emply values
-	
-  if (Array.isArray(users)) {
-  	let nbUsers = users.length;
-    let peoples = "";
-  	
-    if (!nbUsers) {
-    	return "no one like this";
-    } else {
     
-    	if (nbUsers === 1) {
-      	return users[0] + " like this";
+    // check if names is an Array
+    if (Array.isArray(users)) {
+      let users = names.filter(elm => elm); // Remove emply values
+      let nbUsers = users.length;
+      let peoples = "";
+      
+      if (!nbUsers) { // No users
+          return "no one likes this";
       } else {
       
-        for (let i = 0; i < nbUsers; i++) {
-        	
-          if (nbUsers === 2) {
-          	peoples += (!i ? "" : " and ") + users[i];
-          } else {          
-            //peoples += (!i ? "" : (i <= 1 ? ", " : " and " )) + users[i];  
-            peoples += (!i ? "" : (i <= 1 ? ", " : " and " ));
+        if (nbUsers === 1) { // Only one use case
+            return users[0] + " likes this";
+        } else {
+          
+          // For more than one user we format output message
+          for (let i = 0; i < nbUsers; i++) {
             
-            if (i <= 2 && nbUsers <= 3) {
-            	peoples += users[i];
-              break;
+            // First part formating, for the first two names 
+            if (i <= 1) {
+              peoples += (!i ? "" : (nbUsers === 2 ? " and " : ", " )) + users[i]
             } else {
-            	peoples += (nbUsers - 2) + " others";
+              // Second part formating after the "and" we display the name 
+              // if there is three names or "x others" if more than three names
+              peoples += " and " + (nbUsers === 3 ? users[i] : (nbUsers - 2) + " others" );
+              // The processing is finished, we force the loop to stop
               break;
-            }  
-          } 
+            }
+          }
+          
+          return peoples + " like this";
         }
-        
-        return peoples + " likes this";
       }
     }
   }
-}
 
 //let names = ["Peter"];
 //let names = ["Jacob", "Alex"];
